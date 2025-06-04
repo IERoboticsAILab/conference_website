@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ conference.title }} ({{ conference.year }}){% endblock %}
+
+{% block content %}
+<!-- Hero Section with Video Background -->
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+    
+    <!-- Hero Content -->
+    <div class="hero-content">
+        <h1>Symposium on Blockchain for Robotics and AI</h1>
+        <h2>June 10-12, 2025</h2>
+        <h3>Livestream</h3>
+        <iframe width="1404" height="718" src="https://www.youtube.com/embed/ReXFCqx5--s" title="Symposium on Blockchain for Robotics and AI Systems" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+</section>
+
+<!-- Main Content -->
+<div class="container py-5">
+    <section class="row mb-5">
+
+<h2>A symposium that brings together scientists, engineers, entrepreneurs, and key stakeholders to discuss the possibilities of blockchain technology in robotics and AI.</h2>
+<h3>General Chairs</h3>
+<ul>
+    <li>Prof. Alex 'Sandy' Pentland</li>
+    <li>Prof. Marco Dorigo</li>
+    <li>Dr. Thomas Hardjono</li>
+</ul>
+<h3>Program Chairs</h3>
+<ul>
+    <li>Prof. Javier Alonso-Mora</li>
+    <li>Prof. Carlo Pinciroli</li>
+    <li>Prof. Fabio Bonsignorio</li>
+    <li>Dr. Antonio Bucchiarone</li>
+    <li>Prof. Aleksandr Kapitonov</li>
+</ul>
+<h3>Organizers</h3>
+<ul>
+    <li>Dr. Eduardo Castelló Ferrer</li>
+    <li>Dr. Darko Bozhinoski</li>
+</ul>
+<p>
+    Robotics and AI systems are starting to revolutionize many applications, from transportation to health care, assisted by technological advancements, such as cloud computing and novel hardware design.
+
+However, several of the characteristics that make these systems ideal for certain future applications such as autonomy, self-learning, knowledge sharing, can also raise concerns in the evolution of the technology from academic institutions into the public sphere. Blockchain is starting to show great potential to make robotics and AI operations more secure, autonomous, flexible, and even profitable. Therefore, bridging the gap between purely scientific domains and real-world applications.
+
+This symposium seeks to move beyond the classical view of distributed systems to advance our understanding about the possibilities and limitations of combining state-of-the art robotics and AI systems with blockchain technology. </p>
+
+    </section>
+    <section class="row mb-5">
+    <h2>Important Dates</h2>
+    <ul>
+        <li>Submission: CLOSED</li>
+        <li>Paper Submission Deadline: October 31, 2019</li>
+        <li>Author Notification: November 5, 2019</li>
+        <li>Registration: CLOSED</li>
+    </ul>
+    </section>
+
+    <section class="row mb-5">
+        <h2>Call for Papers</h2>
+        <p>
+            Decentralized artificial intelligence and robotics have the potential to revolutionize many applications. Boosted by technological advancements, such as cloud computing and novel hardware design; nowadays AI (virtual) and robotics (physical) are starting to become an important part of activities such as logistics, autonomous transportation, emergency management and healthcare. However, several of the characteristics that make these systems ideal for certain future applications —autonomy, learning, knowledge sharing, collaboration, cooperation, etc.— can also raise concerns in the evolution of the technology from academic institutions into the public sphere. For instance, controlling the behavior of large teams of autonomous agents (either physical or virtual) still presents unique challenges for human operators. In addition, important issues in the fields of data privacy, security, safety, and transparency can become burdens for the future use of AI and robotics in high-sensitive scenarios. Therefore, novel solutions to these issues might be necessary steps towards mainstream adoption. 
+
+Blockchain, an emerging technology originated in the time-stamping field in the 1990s and recently in digital currency sector, demonstrates that by combining peer-to-peer networks with cryptographic algorithms, agents can reach agreements in a transparent and decentralized manner without the need for a controlling authority. For instance, blockchain-based applications such as "smart contracts" are already showing great potential to make distributed robotics operations more secure, autonomous, flexible, and even profitable. Therefore, blockchain promises a way to bridge the gap between purely scientific domains and real-world applications.
+
+This Call of Papers (CFP) seeks to move beyond the classical view of distributed and decentralized systems to advance our understanding about the possibilities of combining autonomous agents (either physical or virtual) with blockchain-based technologies. Insights about the following questions are especially important: What blockchain tools are available to increase the auditability, transparency, and reliability of AI and robotics? What kind of algorithms are suitable to combine both technologies? Are there new models and methods to connect autonomous agents to blockchain-based innovations such as "smart contracts"? Is blockchain technology a suitable way to achieve emergent aggregations of autonomous and self-adaptive agents? Are distributed networks such as Bitcoin, Ethereum, EOS, Tezos, etc. a feasible way to integrate AI and robotics in our society? Are there new business models for AI and robotics based on cryptographic algorithms?
+        </p>
+
+        <p> Below is a list of possible topics that would fit this CFP:</p>
+        <ul>
+            <li>Blockchain-based technology for cyber-physical systems</li>
+            <li>Data privacy, security, safety, and transparency for AI and robotics</li>
+            <li>Auditability for Internet of Robotic Things (IoRT)</li>
+            <li>Collaborative approaches for teams of autonomous agents</li>
+            <li>Decentralized, distributed, and federated networks for AI and robotics</li>
+            <li>New decentralized business models for AI and robotics</li>
+        </ul>
+
+        <p>
+            In addition to this brief list of possible topics, we welcome submissions on other topics addressing AI and robotics in the society. We seek manuscripts with conceptual and theoretical contributions as well as papers documenting valuable results of experiments conducted with real-robots or AI implementations. We welcome research reviews that provide a comprehensive view of any of the fields mentioned previously. 
+        </p>
+
+        <p> <strong>Keywords:</strong> Blockchain, Smart Contracts, Robotics, AI, Cyber-Physical Systems, Trustable Automation, Data Privacy, Verifiable Autonomy, Auditable Systems, Distributed Learning, Networked Systems, Internet of Things, Collective Adaption, Collaborative Systems, New Business Models</p>
+
+        <p>
+            Important Note: Accepted papers will be published as a research topic by Frontiers in Robotics and AI. Therefore, all contributions to this CFP must be within the scope of the section and journal to which they are submitted, as defined in their mission statements. Frontiers reserves the right to guide an out-of-scope manuscript to a more suitable section or journal at any stage of peer review. Papers must be edited using the Frontiers author guidelines and submitted electronically as PDF files via EasyChair:
+        </p>
+        
+
+    </section>
+
+
+
+
+
+    <!-- Program/Agenda -->
+    <section class="row mb-5">
+        <h2>Speakers</h2>
+    </section>
+
+    <!-- Program/Agenda -->
+    {% if agenda_items %}
+    <section class="mb-5">
+        <h2 class="section-title">Program</h2>
+        <div class="agenda-timeline">
+            {% for item in agenda_items %}
+            <div class="agenda-item {% if item.is_break %}agenda-break{% endif %} mb-3">
+                <div class="row">
+                    <div class="col-md-2">
+                        <strong>{{ item.time }}</strong>
+                    </div>
+                    <div class="col-md-10">
+                        <h5>{{ item.title }}</h5>
+                        {% if item.description %}
+                        <p>{{ item.description }}</p>
+                        {% endif %}
+                        {% if item.speakers.all %}
+                        <div class="speakers">
+                            {% for speaker in item.speakers.all %}
+                            <span class="badge bg-secondary me-1">{{ speaker.person.name }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Other Speakers -->
+    {% if regular_speakers %}
+    <section class="mb-5">
+        <h2 class="section-title">Speakers</h2>
+        <div class="row">
+            {% for speaker in regular_speakers %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        {% if speaker.person.image %}
+                        <img src="{{ speaker.person.image.url }}" alt="{{ speaker.person.name }}" class="rounded-circle mb-3" style="width: 60px; height: 60px; object-fit: cover;">
+                        {% endif %}
+                        <h5 class="card-title">{{ speaker.person.name }}</h5>
+                        <p class="text-muted small">{{ speaker.person.title }}</p>
+                        <p class="text-muted small">{{ speaker.person.affiliation }}</p>
+                        {% if speaker.title %}
+                        <p class="small"><strong>{{ speaker.title }}</strong></p>
+                        {% endif %}
+                        {% if speaker.time %}
+                        <small class="text-muted">{{ speaker.time }}</small>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Organizing Committee -->
+    <section id="organizers" class="mb-5">
+        <h2 class="section-title">Organizing Committee</h2>
+        <div class="row">
+            {% if general_chairs %}
+            <div class="col-md-4 mb-4">
+                <h3>General Chairs</h3>
+                {% for chair in general_chairs %}
+                <div class="person-card mb-3">
+                    {% if chair.image %}
+                    <img src="{{ chair.image.url }}" alt="{{ chair.name }}" class="rounded mb-2" style="width: 60px; height: 60px; object-fit: cover;">
+                    {% endif %}
+                    <h5>{{ chair.name }}</h5>
+                    <p class="text-muted small">{{ chair.title }}</p>
+                    <p class="text-muted small">{{ chair.affiliation }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            {% if program_chairs %}
+            <div class="col-md-4 mb-4">
+                <h3>Program Chairs</h3>
+                {% for chair in program_chairs %}
+                <div class="person-card mb-3">
+                    {% if chair.image %}
+                    <img src="{{ chair.image.url }}" alt="{{ chair.name }}" class="rounded mb-2" style="width: 60px; height: 60px; object-fit: cover;">
+                    {% endif %}
+                    <h5>{{ chair.name }}</h5>
+                    <p class="text-muted small">{{ chair.title }}</p>
+                    <p class="text-muted small">{{ chair.affiliation }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            {% if organizers %}
+            <div class="col-md-4 mb-4">
+                <h3>Organizers</h3>
+                {% for organizer in organizers %}
+                <div class="person-card mb-3">
+                    {% if organizer.image %}
+                    <img src="{{ organizer.image.url }}" alt="{{ organizer.name }}" class="rounded mb-2" style="width: 60px; height: 60px; object-fit: cover;">
+                    {% endif %}
+                    <h5>{{ organizer.name }}</h5>
+                    <p class="text-muted small">{{ organizer.title }}</p>
+                    <p class="text-muted small">{{ organizer.affiliation }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+</div>
+
+<style>
+.year-navigation {
+    border-bottom: 1px solid #dee2e6;
+    position: relative;
+    z-index: 999;
+}
+
+.person-card {
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #e9ecef;
+    border-radius: 0.5rem;
+    background: #f8f9fa;
+}
+
+.agenda-item {
+    padding: 1rem;
+    border-left: 3px solid #007bff;
+    background: #f8f9fa;
+    border-radius: 0.25rem;
+}
+
+.agenda-break {
+    border-left-color: #6c757d;
+    background: #e9ecef;
+}
+
+.agenda-timeline {
+    position: relative;
+}
+</style>
+{% endblock %} 
