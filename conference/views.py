@@ -17,8 +17,6 @@ def conference_year(request, year):
     # Get all related data for the conference
     agenda_items = conference.agenda_items.all()
     speakers = conference.speakers.all()
-    keynote_speakers = speakers.filter(is_keynote=True)
-    regular_speakers = speakers.filter(is_keynote=False)
     
     # Get all available years for navigation
     all_years = Conference.objects.values_list('year', flat=True).order_by('-year')
@@ -27,8 +25,6 @@ def conference_year(request, year):
         'conference': conference,
         'agenda_items': agenda_items,
         'speakers': speakers,
-        'keynote_speakers': keynote_speakers,
-        'regular_speakers': regular_speakers,
         'important_dates': conference.important_dates.all(),
         'general_chairs': conference.general_chairs.all(),
         'program_chairs': conference.program_chairs.all(),

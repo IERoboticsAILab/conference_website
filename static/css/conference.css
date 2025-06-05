@@ -227,9 +227,10 @@ p {
 
 /* Important Dates Section Styles */
 .important-dates-section {
-  max-width: 1200px;
-  margin: 4rem auto;
-  padding: 0 2rem;
+  display: flex;
+  justify-content: center;
+  padding: 4rem 0;
+  max-width: 100%;
 }
 
 .dates-wrapper {
@@ -237,6 +238,8 @@ p {
   grid-template-columns: auto 1fr;
   gap: 3rem;
   align-items: center;
+  max-width: 1200px;
+  padding: 0 2rem;
 }
 
 .calendar-icon {
@@ -246,8 +249,8 @@ p {
 }
 
 .calendar-icon img {
-  width: 120px;
-  height: 120px;
+  width: 400px;
+  height: 400px;
   object-fit: contain;
 }
 
@@ -257,12 +260,14 @@ p {
   font-weight: 700;
   color: #000;
   margin-bottom: 1.5rem;
+  text-align: left;
 }
 
 .dates-content ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  text-align: left;
 }
 
 .dates-content ul li {
@@ -295,16 +300,117 @@ p {
   }
   
   .calendar-icon img {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
   }
   
   .dates-content h2 {
     font-size: 2rem;
+    text-align: center;
+  }
+  
+  .dates-content ul {
+    text-align: center;
   }
   
   .dates-content ul li {
     font-size: 1.1rem;
+  }
+}
+
+/* Call for Papers Section Styles */
+.call-for-papers-section {
+  font-family: 'Roboto', 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 4rem 0;
+  max-width: 100%;
+  font-size: 1.2rem;
+}
+
+.call-for-papers-title {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  gap: 2rem;
+}
+
+.papers-wrapper {
+  max-width: 1200px;
+  padding: 0 2rem;
+}
+
+.papers-content h2 {
+  font-family: 'Futura', 'Arial', sans-serif;
+  font-size: 6rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.paper-icon {
+  display: inline-block;
+}
+
+.paper-icon img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+.papers-content p {
+  line-height: 1.7;
+  color: #333;
+  text-align: justify;
+  margin-bottom: 1.5rem;
+}
+
+.papers-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.papers-content ul li {
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.papers-content ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #000;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .papers-content h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .paper-icon img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .papers-content p {
+    text-align: left;
+  }
+  
+  .papers-content ul {
+    text-align: left;
   }
 }
 

@@ -43,18 +43,17 @@ class ImportantDate(models.Model):
         ordering = ['date']
 
 class Speaker(models.Model):
-    conference = models.ForeignKey(Conference, on_delete=models.CASCADE, related_name='speakers')
-    person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    time = models.TimeField(null=True, blank=True)
     title = models.CharField(max_length=200, blank=True)
-    description = models.TextField(blank=True)
-    is_keynote = models.BooleanField(default=False)
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    conference = models.ForeignKey(Conference, on_delete=models.CASCADE, related_name='speakers')
+    profile_image = models.ImageField(upload_to='speakers/', blank=True, null=True)
 
     def __str__(self):
-        return f"{self.person.name} - {self.conference.title}"
+        return f"{self.first_name} {self.last_name} - {self.conference.title}"
 
     class Meta:
-        ordering = ['time']
+        ordering = ['last_name', 'first_name']
 
 class AgendaItem(models.Model):
     conference = models.ForeignKey(Conference, on_delete=models.CASCADE, related_name='agenda_items')
