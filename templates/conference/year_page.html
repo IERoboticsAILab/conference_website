@@ -223,7 +223,28 @@
   {% endif %}
 
   <!-- Program/Agenda -->
-
+  {% if agenda_items %}
+  <section class="agenda-section">
+    <div class="agenda-wrapper">
+      <h2>Agenda</h2>
+      <div class="agenda-timeline">
+        {% for item in agenda_items %}
+        <div class="agenda-row">
+          <div class="agenda-time">
+            {{ item.time_start|time:"G:i" }}-{{ item.time_end|time:"G:i" }}
+          </div>
+          <div class="agenda-icon">
+            <img src="{% static 'images/' %}{{ item.icon }}.png" alt="{{ item.get_icon_display }}" />
+          </div>
+          <div class="agenda-description">
+            {{ item.title }}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
 
 </div>
 {% endblock %}

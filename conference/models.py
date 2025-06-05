@@ -43,7 +43,7 @@ class AgendaItem(models.Model):
     time_start = models.TimeField()
     time_end = models.TimeField()
     title = models.CharField(max_length=200)
-    icon = models.CharField(max_length=20, choices=ICON_CHOICES, default='presentation')
+    icon = models.CharField(max_length=20, choices=ICON_CHOICES, default='keynote')
 
     def __str__(self):
         return f"{self.time_start} - {self.title}"
