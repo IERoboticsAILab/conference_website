@@ -1,15 +1,5 @@
 from django.db import models
 
-class Person(models.Model):
-    name = models.CharField(max_length=200)
-    title = models.CharField(max_length=200, blank=True)
-    affiliation = models.CharField(max_length=200, blank=True)
-    bio = models.TextField(blank=True)
-    image = models.ImageField(upload_to='people/', blank=True, null=True)
-
-    def __str__(self):
-        return self.name
-
 class Conference(models.Model):
     year = models.PositiveIntegerField(unique=True)
     title = models.CharField(max_length=200)
@@ -18,9 +8,6 @@ class Conference(models.Model):
     location = models.CharField(max_length=200)
     venue = models.CharField(max_length=200, blank=True)
     address = models.TextField(blank=True)
-    general_chairs = models.ManyToManyField(Person, related_name='general_chairs', blank=True)
-    program_chairs = models.ManyToManyField(Person, related_name='program_chairs', blank=True)
-    organizers = models.ManyToManyField(Person, related_name='organizers', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -29,18 +16,6 @@ class Conference(models.Model):
 
     class Meta:
         ordering = ['-year']
-
-class ImportantDate(models.Model):
-    conference = models.ForeignKey(Conference, on_delete=models.CASCADE, related_name='important_dates')
-    title = models.CharField(max_length=200)
-    date = models.DateField()
-    is_deadline = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f"{self.title} - {self.date}"
-
-    class Meta:
-        ordering = ['date']
 
 class Speaker(models.Model):
     title = models.CharField(max_length=200, blank=True)
@@ -56,15 +31,22 @@ class Speaker(models.Model):
         ordering = ['last_name', 'first_name']
 
 class AgendaItem(models.Model):
+    ICON_CHOICES = [
+        ('keynote', 'Keynote'),
+        ('break', 'Break'),
+        ('gathering', 'Gathering'),
+        ('paper', 'Paper'),
+        ('drinks', 'Drinks'),
+    ]
+
     conference = models.ForeignKey(Conference, on_delete=models.CASCADE, related_name='agenda_items')
-    time = models.TimeField()
+    time_start = models.TimeField()
+    time_end = models.TimeField()
     title = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    speakers = models.ManyToManyField(Speaker, blank=True)
-    is_break = models.BooleanField(default=False)
+    icon = models.CharField(max_length=20, choices=ICON_CHOICES, default='presentation')
 
     def __str__(self):
-        return f"{self.time} - {self.title}"
+        return f"{self.time_start} - {self.title}"
 
     class Meta:
-        ordering = ['time']
+        ordering = ['time_start']

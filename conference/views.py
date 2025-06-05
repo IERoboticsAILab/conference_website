@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Conference, Person, ImportantDate, Speaker, AgendaItem
+from .models import Conference, AgendaItem, Speaker
 
 def home(request):
     """Redirect to the latest conference year"""
@@ -25,10 +25,6 @@ def conference_year(request, year):
         'conference': conference,
         'agenda_items': agenda_items,
         'speakers': speakers,
-        'important_dates': conference.important_dates.all(),
-        'general_chairs': conference.general_chairs.all(),
-        'program_chairs': conference.program_chairs.all(),
-        'organizers': conference.organizers.all(),
         'all_years': all_years,
         'current_year': year,
     })
