@@ -197,39 +197,33 @@
     </div>
   </section>
 
-  <!-- Program/Agenda -->
-  {% if agenda_items %}
-  <section class="mb-5">
-    <h2 class="section-title">Program</h2>
-    <div class="agenda-timeline">
-      {% for item in agenda_items %}
-      <div
-        class="agenda-item {% if item.is_break %}agenda-break{% endif %} mb-3"
-      >
-        <div class="row">
-          <div class="col-md-2">
-            <strong>{{ item.time }}</strong>
+  <!-- Speakers Section -->
+  {% if speakers %}
+  <section class="speakers-section">
+    <div class="speakers-wrapper">
+      <h2>Speakers</h2>
+      <div class="speakers-grid">
+        {% for speaker in speakers %}
+        <div class="speaker-card">
+          {% if speaker.profile_image %}
+          <div class="speaker-image">
+            <img src="{{ speaker.profile_image.url }}" alt="{{ speaker.first_name }} {{ speaker.last_name }}" />
           </div>
-          <div class="col-md-10">
-            <h5>{{ item.title }}</h5>
-            {% if item.description %}
-            <p>{{ item.description }}</p>
-            {% endif %} {% if item.speakers.all %}
-            <div class="speakers">
-              {% for speaker in item.speakers.all %}
-              <span class="badge bg-secondary me-1"
-                >{{ speaker.person.name }}</span
-              >
-              {% endfor %}
-            </div>
-            {% endif %}
+          {% endif %}
+          <div class="speaker-info">
+            <h3>
+              {% if speaker.title %}{{ speaker.title }} {% endif %}{{ speaker.first_name }} {{ speaker.last_name }}
+            </h3>
           </div>
         </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
   </section>
   {% endif %}
+
+  <!-- Program/Agenda -->
+
 
 </div>
 {% endblock %}
