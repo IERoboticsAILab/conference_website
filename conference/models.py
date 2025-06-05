@@ -30,6 +30,10 @@ class Speaker(models.Model):
     class Meta:
         ordering = ['last_name', 'first_name']
 
+class Organizer(models.Model):
+    name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='organizers/', blank=True, null=True)
+
 class AgendaItem(models.Model):
     ICON_CHOICES = [
         ('keynote', 'Keynote'),

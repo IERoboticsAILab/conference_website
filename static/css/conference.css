@@ -597,3 +597,149 @@ p {
   }
 }
 
+/* Organizers Section Styles */
+.organizers-section {
+  display: flex;
+  justify-content: center;
+  padding: 4rem 0;
+  max-width: 100%;
+}
+
+.organizers-wrapper {
+  max-width: 1200px;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.organizers-wrapper h2 {
+  font-family: 'Futura', 'Arial', sans-serif;
+  font-size: 6rem;
+  font-weight: 700;
+  color: #000;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.organizers-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.organizer-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.organizer-logo img {
+  max-width: 320px;
+  object-fit: contain;
+  transition: filter 0.3s ease;
+}
+
+
+@media (max-width: 768px) {
+  .organizers-wrapper h2 {
+    font-size: 3rem;
+  }
+  
+  .organizers-grid {
+    gap: 2rem;
+    flex-direction: column;
+  }
+  
+  .organizer-logo img {
+    max-height: 80px;
+    max-width: 250px;
+  }
+}
+
+/* Map Section Styles */
+.map-section {
+  padding: 0 4rem;
+  max-width: 100%;
+}
+
+.map-wrapper {
+  max-width: 100%;
+  width: 100%;
+}
+
+.map-content {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 2rem;
+  min-height: 500px;
+}
+
+.map-text {
+  background-color: #fff;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.map-text h2 {
+  font-family: 'Futura', 'Arial', sans-serif;
+  font-size: 6rem;
+  font-weight: 700;
+  color: #000;
+  line-height: 0.9;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.map-text p {
+  font-family: 'Futura', 'Arial', sans-serif;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+}
+
+.map-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.map-container iframe:hover {
+  filter: grayscale(0%);
+}
+
+@media (max-width: 768px) {
+  .map-content {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  
+  .map-text {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .map-text h2 {
+    font-size: 3rem;
+    text-align: center;
+  }
+  
+  .map-container {
+    min-height: 300px;
+  }
+}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Conference, AgendaItem, Speaker
+from .models import Conference, AgendaItem, Speaker, Organizer
 
 def home(request):
     """Redirect to the latest conference year"""
@@ -17,6 +17,7 @@ def conference_year(request, year):
     # Get all related data for the conference
     agenda_items = conference.agenda_items.all()
     speakers = conference.speakers.all()
+    organizers = Organizer.objects.all()
     
     # Get all available years for navigation
     all_years = Conference.objects.values_list('year', flat=True).order_by('-year')
@@ -25,6 +26,7 @@ def conference_year(request, year):
         'conference': conference,
         'agenda_items': agenda_items,
         'speakers': speakers,
+        'organizers': organizers,
         'all_years': all_years,
         'current_year': year,
     })
