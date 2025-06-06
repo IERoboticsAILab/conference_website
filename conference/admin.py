@@ -1,30 +1,57 @@
 from django.contrib import admin
+from django.db import models
+from django.forms import Textarea
 from .models import Conference, Speaker, AgendaItem, Organizer
 
-class PersonAdmin(admin.ModelAdmin):
-    list_display = ('name', 'title', 'affiliation')
-    search_fields = ('name', 'title', 'affiliation')
+class MarkdownWidget(Textarea):
+    """Custom widget for markdown fields with helpful attributes"""
+    def __init__(self, attrs=None):
+        default_attrs = {
+            'class': 'markdown-input',
+            'rows': 20,
+            'cols': 80,
+            'placeholder': 'Enter markdown content here...'
+        }
+        if attrs:
+            default_attrs.update(attrs)
+        super().__init__(default_attrs)
 
-
-
-class SpeakerInline(admin.TabularInline):
-    model = Speaker
-    extra = 1
-
-class AgendaItemInline(admin.TabularInline):
-    model = AgendaItem
-    extra = 1
-
-class OrganizerInline(admin.TabularInline):
-    model = Organizer
-    extra = 1
-
+@admin.register(Conference)
 class ConferenceAdmin(admin.ModelAdmin):
-    list_display = ('title', 'year', 'date', 'location')
-    list_filter = ('year',)
-    search_fields = ('title', 'description', 'location')
+    list_display = ['title', 'year', 'date', 'location']
+    list_filter = ['year', 'date']
+    search_fields = ['title', 'location', 'venue']
+    ordering = ['-year']
+    
+    # Use custom widget for description field
+    formfield_overrides = {
+        models.TextField: {'widget': MarkdownWidget},
+    }
+    
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('year', 'title', 'date', 'location', 'venue', 'address')
+        }),
+        ('Content (Markdown Enabled)', {
+            'fields': ('description', 'call_for_papers'),
+            'description': 'You can use markdown syntax in these fields. Preview will be available on the frontend.'
+        }),
+    )
 
-admin.site.register(Conference, ConferenceAdmin)
-admin.site.register(Speaker)
-admin.site.register(AgendaItem)
-admin.site.register(Organizer)
+@admin.register(Speaker)
+class SpeakerAdmin(admin.ModelAdmin):
+    list_display = ['first_name', 'last_name', 'title', 'conference']
+    list_filter = ['conference']
+    search_fields = ['first_name', 'last_name', 'title']
+
+@admin.register(AgendaItem)
+class AgendaItemAdmin(admin.ModelAdmin):
+    list_display = ['title', 'conference', 'time_start', 'time_end', 'icon']
+    list_filter = ['conference', 'icon']
+    search_fields = ['title']
+    ordering = ['conference', 'time_start']
+
+@admin.register(Organizer)
+class OrganizerAdmin(admin.ModelAdmin):
+    list_display = ['name']
+    search_fields = ['name']

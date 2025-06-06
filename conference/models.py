@@ -3,7 +3,8 @@ from django.db import models
 class Conference(models.Model):
     year = models.PositiveIntegerField(unique=True)
     title = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
+    description = models.TextField(blank=True, help_text="Main conference description (supports markdown)")
+    call_for_papers = models.TextField(blank=True, help_text="Call for papers content (supports markdown)")
     date = models.DateField(null=True, blank=True)
     location = models.CharField(max_length=200)
     venue = models.CharField(max_length=200, blank=True)

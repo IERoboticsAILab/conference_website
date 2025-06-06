@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load markdown_extras %}
+
+{% block title %}Markdown Extras Demo{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="mb-4">Markdown Extras Demo</h1>
+            <p class="lead">This page demonstrates all the markdown features available in your Django project.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="markdown-content">
+                {{ markdown_demo_content|markdown }}
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Available Features</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li>✅ Tables</li>
+                        <li>✅ Code highlighting</li>
+                        <li>✅ Footnotes</li>
+                        <li>✅ Task lists</li>
+                        <li>✅ Math equations</li>
+                        <li>✅ Emojis</li>
+                        <li>✅ Admonitions</li>
+                        <li>✅ Table of Contents</li>
+                        <li>✅ Mermaid diagrams</li>
+                        <li>✅ Keyboard keys</li>
+                        <li>✅ Smart symbols</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5>Usage in Templates</h5>
+                </div>
+                <div class="card-body">
+                    <p>To use markdown in your templates:</p>
+                    <pre><code>{% verbatim %}{% load markdown_extras %}
+{{ content|markdown }}{% endverbatim %}</code></pre>
+                    
+                    <p>For model fields:</p>
+                    <pre><code>{% verbatim %}{{ conference.description|markdown }}{% endverbatim %}</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
