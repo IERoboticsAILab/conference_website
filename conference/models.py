@@ -7,6 +7,13 @@ class Conference(models.Model):
     call_for_papers = models.TextField(blank=True, help_text="Call for papers content (supports markdown)")
     submission_button_text = models.CharField(max_length=200, blank=True, default="MANUSCRIPT SUBMISSION CLOSED", help_text="Text displayed on the submission button")
     submission_button_link = models.URLField(blank=True, help_text="URL for the submission button (leave empty to disable link)")
+    
+    # Hero section fields
+    hero_title = models.CharField(max_length=300, blank=True, help_text="Main title in hero section (defaults to conference title if empty)")
+    hero_subtitle = models.TextField(blank=True, help_text="Subtitle with date, location, etc. Supports line breaks with <br>")
+    livestream_label = models.CharField(max_length=100, blank=True, default="Livestream", help_text="Label above the video")
+    livestream_video_url = models.URLField(blank=True, help_text="YouTube embed URL (e.g., https://www.youtube.com/embed/VIDEO_ID)")
+    show_livestream = models.BooleanField(default=True, help_text="Show/hide the livestream video section")
     date = models.DateField(null=True, blank=True)
     location = models.CharField(max_length=200)
     venue = models.CharField(max_length=200, blank=True)
@@ -58,6 +65,36 @@ class ConferenceRole(models.Model):
     
     class Meta:
         ordering = ['role_type', 'order', 'last_name']
+
+class ImportantDate(models.Model):
+    conference = models.ForeignKey(Conference, on_delete=models.CASCADE, related_name='important_dates')
+    title = models.CharField(max_length=200, help_text="e.g., 'Paper Submission Deadline', 'Registration'")
+    date = models.DateField(null=True, blank=True, help_text="Leave empty if using status text only")
+    status_text = models.CharField(max_length=100, blank=True, help_text="e.g., 'CLOSED', 'OPEN' - shown instead of date if provided")
+    is_closed = models.BooleanField(default=False, help_text="Show as 'CLOSED' status")
+    order = models.PositiveIntegerField(default=0, help_text="Display order")
+    
+    def __str__(self):
+        if self.status_text:
+            return f"{self.title}: {self.status_text}"
+        elif self.date:
+            return f"{self.title}: {self.date.strftime('%B %d, %Y')}"
+        else:
+            return self.title
+    
+    def get_display_text(self):
+        """Returns the text to display for this date"""
+        if self.is_closed:
+            return "CLOSED"
+        elif self.status_text:
+            return self.status_text
+        elif self.date:
+            return self.date.strftime('%B %d, %Y')
+        else:
+            return ""
+    
+    class Meta:
+        ordering = ['order', 'title']
 
 class AgendaItem(models.Model):
     ICON_CHOICES = [

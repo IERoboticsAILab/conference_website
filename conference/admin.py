@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from django.forms import Textarea
-from .models import Conference, Speaker, AgendaItem, Organizer, ConferenceRole
+from .models import Conference, Speaker, AgendaItem, Organizer, ConferenceRole, ImportantDate
 
 class MarkdownWidget(Textarea):
     """Custom widget for markdown fields with helpful attributes"""
@@ -32,6 +32,10 @@ class ConferenceAdmin(admin.ModelAdmin):
         ('Basic Information', {
             'fields': ('year', 'title', 'date', 'location', 'venue', 'address')
         }),
+        ('Hero Section', {
+            'fields': ('hero_title', 'hero_subtitle', 'show_livestream', 'livestream_label', 'livestream_video_url'),
+            'description': 'Configure the main hero section at the top of the page. Hero title defaults to conference title if empty.'
+        }),
         ('Content (Markdown Enabled)', {
             'fields': ('description', 'call_for_papers'),
             'description': 'You can use markdown syntax in these fields. Preview will be available on the frontend.'
@@ -41,6 +45,28 @@ class ConferenceAdmin(admin.ModelAdmin):
             'description': 'Configure the submission button that appears under the call for papers.'
         }),
     )
+
+@admin.register(ImportantDate)
+class ImportantDateAdmin(admin.ModelAdmin):
+    list_display = ['title', 'conference', 'get_display_text', 'order']
+    list_filter = ['conference', 'is_closed']
+    search_fields = ['title', 'status_text']
+    ordering = ['conference', 'order', 'title']
+    list_editable = ['order']
+    
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('conference', 'title', 'order')
+        }),
+        ('Date/Status', {
+            'fields': ('date', 'status_text', 'is_closed'),
+            'description': 'Either set a date, or use status text, or check "is_closed" for CLOSED status.'
+        }),
+    )
+    
+    def get_display_text(self, obj):
+        return obj.get_display_text()
+    get_display_text.short_description = 'Display Text'
 
 @admin.register(Speaker)
 class SpeakerAdmin(admin.ModelAdmin):
