@@ -83,8 +83,21 @@ class AgendaItemAdmin(admin.ModelAdmin):
 
 @admin.register(Organizer)
 class OrganizerAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['name', 'conference', 'order']
+    list_filter = ['conference']
     search_fields = ['name']
+    ordering = ['conference', 'order', 'name']
+    list_editable = ['order']
+    
+    fieldsets = (
+        ('Organization Information', {
+            'fields': ('conference', 'name', 'image')
+        }),
+        ('Display Options', {
+            'fields': ('order',),
+            'description': 'Lower numbers appear first'
+        }),
+    )
 
 @admin.register(ConferenceRole)
 class ConferenceRoleAdmin(admin.ModelAdmin):

@@ -41,8 +41,16 @@ class Speaker(models.Model):
         ordering = ['last_name', 'first_name']
 
 class Organizer(models.Model):
+    conference = models.ForeignKey(Conference, on_delete=models.CASCADE, related_name='organizers')
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to='organizers/', blank=True, null=True)
+    order = models.PositiveIntegerField(default=0, help_text="Display order")
+    
+    def __str__(self):
+        return f"{self.name} - {self.conference.title}"
+    
+    class Meta:
+        ordering = ['order', 'name']
 
 class ConferenceRole(models.Model):
     ROLE_CHOICES = [
