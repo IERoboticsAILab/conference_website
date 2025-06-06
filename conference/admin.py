@@ -36,6 +36,10 @@ class ConferenceAdmin(admin.ModelAdmin):
             'fields': ('hero_title', 'hero_subtitle', 'show_livestream', 'livestream_label', 'livestream_video_url'),
             'description': 'Configure the main hero section at the top of the page. Hero title defaults to conference title if empty.'
         }),
+        ('Map Section', {
+            'fields': ('show_map', 'map_venue_name', 'map_address', 'map_embed_url'),
+            'description': 'Configure the map section at the bottom of the page. Get embed URL from Google Maps > Share > Embed.'
+        }),
         ('Content (Markdown Enabled)', {
             'fields': ('description', 'call_for_papers'),
             'description': 'You can use markdown syntax in these fields. Preview will be available on the frontend.'
@@ -76,10 +80,21 @@ class SpeakerAdmin(admin.ModelAdmin):
 
 @admin.register(AgendaItem)
 class AgendaItemAdmin(admin.ModelAdmin):
-    list_display = ['title', 'conference', 'time_start', 'time_end', 'icon']
+    list_display = ['content_preview', 'conference', 'time_start', 'time_end', 'icon']
     list_filter = ['conference', 'icon']
-    search_fields = ['title']
+    search_fields = ['content']
     ordering = ['conference', 'time_start']
+    
+    # Use custom widget for content field
+    formfield_overrides = {
+        models.TextField: {'widget': MarkdownWidget},
+    }
+    
+    def content_preview(self, obj):
+        """Show a preview of the content in the list display"""
+        preview = obj.content[:50] + "..." if len(obj.content) > 50 else obj.content
+        return preview
+    content_preview.short_description = 'Content'
 
 @admin.register(Organizer)
 class OrganizerAdmin(admin.ModelAdmin):

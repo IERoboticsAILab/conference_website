@@ -14,6 +14,12 @@ class Conference(models.Model):
     livestream_label = models.CharField(max_length=100, blank=True, default="Livestream", help_text="Label above the video")
     livestream_video_url = models.URLField(blank=True, help_text="YouTube embed URL (e.g., https://www.youtube.com/embed/VIDEO_ID)")
     show_livestream = models.BooleanField(default=True, help_text="Show/hide the livestream video section")
+    
+    # Map section fields
+    map_venue_name = models.CharField(max_length=200, blank=True, help_text="Large venue name displayed on map (supports line breaks with <br>)")
+    map_address = models.TextField(blank=True, help_text="Detailed address shown below venue name (supports line breaks with <br>)")
+    map_embed_url = models.URLField(blank=True, help_text="Google Maps embed URL (get from Google Maps > Share > Embed)")
+    show_map = models.BooleanField(default=True, help_text="Show/hide the map section")
     date = models.DateField(null=True, blank=True)
     location = models.CharField(max_length=200)
     venue = models.CharField(max_length=200, blank=True)
@@ -116,11 +122,13 @@ class AgendaItem(models.Model):
     conference = models.ForeignKey(Conference, on_delete=models.CASCADE, related_name='agenda_items')
     time_start = models.TimeField()
     time_end = models.TimeField()
-    title = models.CharField(max_length=200)
+    content = models.TextField(help_text="Agenda item content (supports markdown for lists, formatting, etc.)")
     icon = models.CharField(max_length=20, choices=ICON_CHOICES, default='keynote')
 
     def __str__(self):
-        return f"{self.time_start} - {self.title}"
+        # Show first 50 characters of content for display
+        content_preview = self.content[:50] + "..." if len(self.content) > 50 else self.content
+        return f"{self.time_start} - {content_preview}"
 
     class Meta:
         ordering = ['time_start']
