@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from django.forms import Textarea
-from .models import Conference, Speaker, AgendaItem, Organizer, ConferenceRole, ImportantDate
+from .models import Conference, Speaker, AgendaItem, Organizer, ConferenceRole, ImportantDate, Footer
 
 class MarkdownWidget(Textarea):
     """Custom widget for markdown fields with helpful attributes"""
@@ -130,3 +130,39 @@ class ConferenceRoleAdmin(admin.ModelAdmin):
             'fields': ('conference', 'role_type', 'order')
         }),
     )
+
+@admin.register(Footer)
+class FooterAdmin(admin.ModelAdmin):
+    list_display = ['organization_name', 'email', 'show_social_links', 'show_contact_info', 'updated_at']
+    search_fields = ['organization_name', 'email']
+    
+    # Use custom widget for additional_info field
+    formfield_overrides = {
+        models.TextField: {'widget': MarkdownWidget},
+    }
+    
+    fieldsets = (
+        ('Organization Information', {
+            'fields': ('organization_name', 'tagline')
+        }),
+        ('Contact Information', {
+            'fields': ('show_contact_info', 'email', 'phone', 'address'),
+            'description': 'Contact details displayed in footer'
+        }),
+        ('Social Media', {
+            'fields': ('show_social_links', 'twitter_url', 'linkedin_url', 'github_url', 'facebook_url', 'youtube_url'),
+            'description': 'Social media profile links'
+        }),
+        ('Additional Content', {
+            'fields': ('copyright_text', 'additional_info'),
+            'description': 'Copyright notice and additional footer content (supports markdown)'
+        }),
+    )
+    
+    def has_add_permission(self, request):
+        # Only allow one footer instance
+        return not Footer.objects.exists()
+    
+    def has_delete_permission(self, request, obj=None):
+        # Don't allow deletion of footer settings
+        return False

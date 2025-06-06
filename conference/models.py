@@ -132,3 +132,39 @@ class AgendaItem(models.Model):
 
     class Meta:
         ordering = ['time_start']
+
+
+class Footer(models.Model):
+    # Organization info
+    organization_name = models.CharField(max_length=200, blank=True, help_text="Main organization name")
+    tagline = models.CharField(max_length=300, blank=True, help_text="Short tagline or description")
+    
+    # Contact information
+    email = models.EmailField(blank=True, help_text="Contact email address")
+    phone = models.CharField(max_length=50, blank=True, help_text="Contact phone number")
+    address = models.TextField(blank=True, help_text="Physical address (supports line breaks with <br>)")
+    
+    # Social media links
+    twitter_url = models.URLField(blank=True, help_text="Twitter profile URL")
+    linkedin_url = models.URLField(blank=True, help_text="LinkedIn profile URL")
+    github_url = models.URLField(blank=True, help_text="GitHub profile URL")
+    facebook_url = models.URLField(blank=True, help_text="Facebook profile URL")
+    youtube_url = models.URLField(blank=True, help_text="YouTube channel URL")
+    
+    # Additional content
+    copyright_text = models.CharField(max_length=200, blank=True, help_text="Copyright notice (year will be auto-added)")
+    additional_info = models.TextField(blank=True, help_text="Additional footer content (supports markdown)")
+    
+    # Display options
+    show_social_links = models.BooleanField(default=True, help_text="Show/hide social media links")
+    show_contact_info = models.BooleanField(default=True, help_text="Show/hide contact information")
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f"Footer Settings - {self.organization_name or 'Website'}"
+    
+    class Meta:
+        verbose_name = "Footer Settings"
+        verbose_name_plural = "Footer Settings"

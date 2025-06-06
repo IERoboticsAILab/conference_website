@@ -1,0 +1,185 @@
+{% load markdown_extras %}
+{% if footer %}
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-content">
+      
+      {% if footer.organization_name or footer.tagline %}
+      <div class="footer-section organization-info">
+        {% if footer.organization_name %}
+          <h3>{{ footer.organization_name }}</h3>
+        {% endif %}
+        {% if footer.tagline %}
+          <p class="tagline">{{ footer.tagline }}</p>
+        {% endif %}
+      </div>
+      {% endif %}
+      
+      {% if footer.show_contact_info and footer.email or footer.phone or footer.address %}
+      <div class="footer-section contact-info">
+        <h4>Contact</h4>
+        {% if footer.email %}
+          <p><strong>Email:</strong> <a href="mailto:{{ footer.email }}">{{ footer.email }}</a></p>
+        {% endif %}
+        {% if footer.phone %}
+          <p><strong>Phone:</strong> {{ footer.phone }}</p>
+        {% endif %}
+        {% if footer.address %}
+          <p><strong>Address:</strong><br>{{ footer.address|safe }}</p>
+        {% endif %}
+      </div>
+      {% endif %}
+      
+      {% if footer.show_social_links %}
+      <div class="footer-section social-links">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          {% if footer.twitter_url %}
+            <a href="{{ footer.twitter_url }}" target="_blank" rel="noopener">Twitter</a>
+          {% endif %}
+          {% if footer.linkedin_url %}
+            <a href="{{ footer.linkedin_url }}" target="_blank" rel="noopener">LinkedIn</a>
+          {% endif %}
+          {% if footer.github_url %}
+            <a href="{{ footer.github_url }}" target="_blank" rel="noopener">GitHub</a>
+          {% endif %}
+          {% if footer.facebook_url %}
+            <a href="{{ footer.facebook_url }}" target="_blank" rel="noopener">Facebook</a>
+          {% endif %}
+          {% if footer.youtube_url %}
+            <a href="{{ footer.youtube_url }}" target="_blank" rel="noopener">YouTube</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+      
+      {% if footer.additional_info %}
+      <div class="footer-section additional-content">
+        <div class="markdown-content">
+          {{ footer.additional_info|markdown }}
+        </div>
+      </div>
+      {% endif %}
+      
+    </div>
+    
+    <div class="footer-bottom">
+      {% if footer.copyright_text %}
+        <p>&copy; {% now "Y" %} {{ footer.copyright_text }}</p>
+      {% else %}
+        <p>&copy; {% now "Y" %} {% if footer.organization_name %}{{ footer.organization_name }}{% else %}Conference Website{% endif %}. All rights reserved.</p>
+      {% endif %}
+    </div>
+    
+  </div>
+</footer>
+
+<style>
+.site-footer {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 40px 0 20px;
+  margin-top: 60px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.footer-section h3 {
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.footer-section h4 {
+  color: #cccccc;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.footer-section p {
+  color: #bbbbbb;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.footer-section .tagline {
+  font-style: italic;
+  color: #999999;
+}
+
+.footer-section a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  color: #66BB6A;
+  text-decoration: underline;
+}
+
+.social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.social-icons a {
+  background-color: #333333;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.social-icons a:hover {
+  background-color: #4CAF50;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  border-top: 1px solid #333333;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.footer-bottom p {
+  color: #888888;
+  margin: 0;
+}
+
+.footer-section .markdown-content {
+  color: #bbbbbb;
+}
+
+.footer-section .markdown-content h1,
+.footer-section .markdown-content h2,
+.footer-section .markdown-content h3,
+.footer-section .markdown-content h4,
+.footer-section .markdown-content h5,
+.footer-section .markdown-content h6 {
+  color: #cccccc;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .social-icons {
+    justify-content: center;
+  }
+}
+</style>
+
+{% endif %} 
