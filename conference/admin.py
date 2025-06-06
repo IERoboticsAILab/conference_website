@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from django.forms import Textarea
-from .models import Conference, Speaker, AgendaItem, Organizer
+from .models import Conference, Speaker, AgendaItem, Organizer, ConferenceRole
 
 class MarkdownWidget(Textarea):
     """Custom widget for markdown fields with helpful attributes"""
@@ -55,3 +55,20 @@ class AgendaItemAdmin(admin.ModelAdmin):
 class OrganizerAdmin(admin.ModelAdmin):
     list_display = ['name']
     search_fields = ['name']
+
+@admin.register(ConferenceRole)
+class ConferenceRoleAdmin(admin.ModelAdmin):
+    list_display = ['title', 'first_name', 'last_name', 'role_type', 'conference', 'order']
+    list_filter = ['role_type', 'conference']
+    search_fields = ['first_name', 'last_name', 'title', 'affiliation']
+    ordering = ['conference', 'role_type', 'order', 'last_name']
+    list_editable = ['order']
+    
+    fieldsets = (
+        ('Personal Information', {
+            'fields': ('title', 'first_name', 'last_name', 'affiliation')
+        }),
+        ('Role Information', {
+            'fields': ('conference', 'role_type', 'order')
+        }),
+    )

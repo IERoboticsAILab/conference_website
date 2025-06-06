@@ -19,6 +19,11 @@ def conference_year(request, year):
     speakers = conference.speakers.all()
     organizers = Organizer.objects.all()
     
+    # Get conference roles grouped by type
+    general_chairs = conference.roles.filter(role_type='general_chair')
+    program_chairs = conference.roles.filter(role_type='program_chair')
+    conference_organizers = conference.roles.filter(role_type='organizer')
+    
     # Get all available years for navigation
     all_years = Conference.objects.values_list('year', flat=True).order_by('-year')
     
@@ -27,6 +32,9 @@ def conference_year(request, year):
         'agenda_items': agenda_items,
         'speakers': speakers,
         'organizers': organizers,
+        'general_chairs': general_chairs,
+        'program_chairs': program_chairs,
+        'conference_organizers': conference_organizers,
         'all_years': all_years,
         'current_year': year,
     })
