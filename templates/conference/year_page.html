@@ -101,11 +101,6 @@
           </p>
         {% endif %}
         
-        <div class="mt-3">
-          <a href="{% url 'markdown_demo' %}" class="btn btn-outline-primary btn-sm">
-            📄 View Markdown Demo
-          </a>
-        </div>
       </div>
     </div>
   </section>
@@ -225,6 +220,20 @@
             Frontiers author guidelines and submitted electronically as PDF files via
             EasyChair:
           </p>
+        {% endif %}
+        
+        {% if conference.submission_button_text %}
+        <div class="submission-button-container mt-4">
+          {% if conference.submission_button_link %}
+            <a href="{{ conference.submission_button_link }}" class="submission-button" target="_blank">
+              {{ conference.submission_button_text }}
+            </a>
+          {% else %}
+            <div class="submission-button">
+              {{ conference.submission_button_text }}
+            </div>
+          {% endif %}
+        </div>
         {% endif %}
       </div>
     </div>

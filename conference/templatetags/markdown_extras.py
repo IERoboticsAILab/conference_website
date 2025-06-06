@@ -102,6 +102,21 @@ def markdown_css():
          .markdown-content {
              line-height: 1.6;
          }
+         
+         /* Red links in markdown content */
+         .markdown-content a {
+             color: #d32f2f;
+             text-decoration: none;
+         }
+         
+         .markdown-content a:hover {
+             color: #b71c1c;
+             text-decoration: underline;
+         }
+         
+         .markdown-content a:visited {
+             color: #ad1457;
+         }
         
                  /* Basic typography - inherits from conference.css for headers */
          .markdown-content blockquote {
@@ -220,13 +235,51 @@ def markdown_css():
             vertical-align: middle;
         }
         
-        /* Mark/highlight text */
-        .markdown-content mark {
-            background-color: #fff3cd;
-            padding: 2px 4px;
-        }
-    </style>
-    ''')
+                 /* Mark/highlight text */
+         .markdown-content mark {
+             background-color: #fff3cd;
+             padding: 2px 4px;
+         }
+         
+         /* Submission Button Styling */
+         .submission-button-container {
+             display: flex;
+             justify-content: center;
+             margin: 2rem 0;
+         }
+         
+         .submission-button {
+             display: inline-block;
+             padding: 15px 30px;
+             border: 2px solid #000;
+             background-color: transparent;
+             color: #000;
+             text-decoration: none;
+             font-weight: bold;
+             font-size: 16px;
+             letter-spacing: 1px;
+             text-align: center;
+             transition: all 0.3s ease;
+             cursor: pointer;
+         }
+         
+         .submission-button:hover {
+             background-color: #000;
+             color: #fff;
+             text-decoration: none;
+         }
+         
+         .submission-button-disabled {
+             cursor: default;
+             opacity: 0.7;
+         }
+         
+         .submission-button-disabled:hover {
+             background-color: transparent;
+             color: #000;
+         }
+     </style>
+     ''')
 
 @register.simple_tag
 def markdown_js():

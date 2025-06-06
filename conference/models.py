@@ -5,6 +5,8 @@ class Conference(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, help_text="Main conference description (supports markdown)")
     call_for_papers = models.TextField(blank=True, help_text="Call for papers content (supports markdown)")
+    submission_button_text = models.CharField(max_length=200, blank=True, default="MANUSCRIPT SUBMISSION CLOSED", help_text="Text displayed on the submission button")
+    submission_button_link = models.URLField(blank=True, help_text="URL for the submission button (leave empty to disable link)")
     date = models.DateField(null=True, blank=True)
     location = models.CharField(max_length=200)
     venue = models.CharField(max_length=200, blank=True)

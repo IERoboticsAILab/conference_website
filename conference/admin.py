@@ -36,6 +36,10 @@ class ConferenceAdmin(admin.ModelAdmin):
             'fields': ('description', 'call_for_papers'),
             'description': 'You can use markdown syntax in these fields. Preview will be available on the frontend.'
         }),
+        ('Submission Button', {
+            'fields': ('submission_button_text', 'submission_button_link'),
+            'description': 'Configure the submission button that appears under the call for papers.'
+        }),
     )
 
 @admin.register(Speaker)
