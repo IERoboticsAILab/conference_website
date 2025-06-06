@@ -39,6 +39,7 @@ class Speaker(models.Model):
     last_name = models.CharField(max_length=200)
     conference = models.ForeignKey(Conference, on_delete=models.CASCADE, related_name='speakers')
     profile_image = models.ImageField(upload_to='speakers/', blank=True, null=True)
+    link_url = models.URLField(blank=True, help_text="Link for speaker profile (personal website, LinkedIn, etc.)")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.conference.title}"

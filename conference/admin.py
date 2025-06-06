@@ -74,9 +74,27 @@ class ImportantDateAdmin(admin.ModelAdmin):
 
 @admin.register(Speaker)
 class SpeakerAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'last_name', 'title', 'conference']
+    list_display = ['first_name', 'last_name', 'title', 'conference', 'has_link']
     list_filter = ['conference']
     search_fields = ['first_name', 'last_name', 'title']
+    
+    fieldsets = (
+        ('Personal Information', {
+            'fields': ('title', 'first_name', 'last_name')
+        }),
+        ('Conference Information', {
+            'fields': ('conference',)
+        }),
+        ('Media & Links', {
+            'fields': ('profile_image', 'link_url'),
+            'description': 'Speaker profile image and optional link (personal website, LinkedIn, etc.)'
+        }),
+    )
+    
+    def has_link(self, obj):
+        return bool(obj.link_url)
+    has_link.boolean = True
+    has_link.short_description = 'Has Link'
 
 @admin.register(AgendaItem)
 class AgendaItemAdmin(admin.ModelAdmin):

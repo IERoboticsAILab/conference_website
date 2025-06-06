@@ -178,12 +178,24 @@
         <div class="speaker-card">
           {% if speaker.profile_image %}
           <div class="speaker-image">
-            <img src="{{ speaker.profile_image.url }}" alt="{{ speaker.first_name }} {{ speaker.last_name }}" />
+            {% if speaker.link_url %}
+              <a href="{{ speaker.link_url }}" target="_blank" rel="noopener noreferrer">
+                <img src="{{ speaker.profile_image.url }}" alt="{{ speaker.first_name }} {{ speaker.last_name }}" />
+              </a>
+            {% else %}
+              <img src="{{ speaker.profile_image.url }}" alt="{{ speaker.first_name }} {{ speaker.last_name }}" />
+            {% endif %}
           </div>
           {% endif %}
           <div class="speaker-info">
             <h3>
-              {% if speaker.title %}{{ speaker.title }} {% endif %}{{ speaker.first_name }} {{ speaker.last_name }}
+              {% if speaker.link_url %}
+                <a href="{{ speaker.link_url }}" target="_blank" rel="noopener noreferrer">
+                  {% if speaker.title %}{{ speaker.title }} {% endif %}{{ speaker.first_name }} {{ speaker.last_name }}
+                </a>
+              {% else %}
+                {% if speaker.title %}{{ speaker.title }} {% endif %}{{ speaker.first_name }} {{ speaker.last_name }}
+              {% endif %}
             </h3>
           </div>
         </div>
